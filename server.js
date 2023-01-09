@@ -22,7 +22,7 @@ mongoose.connect(
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 const  corsOption = {
-  origin:["http://localhost:3000", "https://user.onrender.com"],
+  origin:["http://localhost:3000", "https://user-6f37.onrender.com"],
   credentials: true,
   methods:["GET","POST", "PUT", "DELETE"]
 };
@@ -33,13 +33,17 @@ app.use(passport.initialize());
 //call the passport configuration
 configureJwtStrategy(passport);
 // /uploads/images/name with data different
+
+
 app.use("/uploads", express.static("uploads"));
 
 ///routers
 
 app.use("/api/auth", userRouter);
 app.use("/api/post", postRouter);
-
+app.use("/",(req,res)=>{
+  res.send("hello")
+})
 app.use((error, req, res, next) => {
   res
     .status(error.status || 500)
